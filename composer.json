@@ -1,0 +1,38 @@
+{
+    "name": "che/crack-pack",
+    "description": "Package installation protocol",
+    "keywords": ["package", "install", "deploy"],
+    "homepage": "http://github.com/chEbba/EventBand",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kirill chEbba Chebunin",
+            "email": "iam@chebba.org"
+        }
+    ],
+
+    "autoload": {
+        "psr-0": { "Che\\BuildGuild": "src/" }
+    },
+
+    "require": {
+        "php": ">=5.4",
+        "composer/composer": "1.0.*@dev",
+        "symfony/filesystem": "~2.3",
+        "symfony/yaml": "~2.3",
+        "che/log-stock": "2.0.*@dev",
+        "monolog/monolog": "~1.3",
+        "symfony/monolog-bridge": "2.4.*@dev"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
