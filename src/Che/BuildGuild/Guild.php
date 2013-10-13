@@ -85,6 +85,14 @@ class Guild
     }
 
     /**
+     * @return PackageInterface[]
+     */
+    public function getInstalledPackages()
+    {
+        return $this->localRepository->getPackages();
+    }
+
+    /**
      * @param PackageInterface $package
      *
      * @throws InstallationException
