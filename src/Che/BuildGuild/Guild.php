@@ -53,6 +53,8 @@ class Guild
         }
 
         $this->install($package);
+
+        return $package;
     }
 
     public function installFile($file, $name, $version = null, $distType = 'tar')
@@ -68,6 +70,8 @@ class Guild
         $package->setDistUrl($file);
 
         $this->install($package);
+
+        return $package;
     }
 
     public function testPackage($name, $reportDir = null)
@@ -107,7 +111,7 @@ class Guild
             );
         }
 
-        if ($this->localRepository->hasPackage($package)) {
+        if ($this->installer->isInstalled($this->localRepository, $package)) {
             return;
         }
 

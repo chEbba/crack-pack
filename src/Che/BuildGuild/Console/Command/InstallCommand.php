@@ -43,9 +43,11 @@ class InstallCommand extends BaseGuildCommand
         $version = array_shift($parts);
 
         if ($file = $input->getOption('file')) {
-            $guild->installFile($file, $name, $version);
+            $package = $guild->installFile($file, $name, $version);
         } else {
-            $guild->installPackage($name, $version);
+            $package = $guild->installPackage($name, $version);
         }
+
+        $output->writeln(sprintf('Package <info>%s:%s</info> installed', $package->getName(), $package->getPrettyVersion()));
     }
 }
