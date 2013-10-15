@@ -21,7 +21,7 @@ class GuildInstaller implements InstallerInterface
     const PACKAGE_TYPE = 'guild';
     const DIR_BUILDS = 'builds';
     const DIR_CURRENT = 'current';
-    const BUILD_SCRIPT = '.build/setup';
+    const BUILD_SCRIPT = 'bin/setup';
 
     private $buildPath;
     private $dm;
