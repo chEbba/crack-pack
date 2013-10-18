@@ -93,6 +93,8 @@ class Guild
 
         $this->installer->uninstall($this->localRepository, $package);
 
+        $this->localRepository->write();
+
         return $package;
     }
 
