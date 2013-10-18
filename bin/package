@@ -4,6 +4,7 @@ set -e
 
 COMMIT=`git rev-parse HEAD`
 
+rm -rf /tmp/bg-box
 git clone . /tmp/bg-box
 (cd /tmp/bg-box && git checkout $COMMIT && composer install && box build)
 
