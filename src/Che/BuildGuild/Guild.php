@@ -76,16 +76,24 @@ class Guild
 
     public function testPackage($name, $reportDir = null)
     {
-        try {
-            $package = $this->findInstalledPackage($name);
-        } catch (\Exception $e) {
-            throw new RepositoryException('Error while reading local repository', $e);
-        }
+        $package = $this->findInstalledPackage($name);
         if (!$package) {
             throw new PackageNotFoundException($name);
         }
 
         $this->installer->test($this->localRepository, $package, $reportDir);
+    }
+
+    public function uninstall($name)
+    {
+        $package = $this->findInstalledPackage($name);
+        if (!$package) {
+            throw new PackageNotFoundException($name);
+        }
+
+        $this->installer->uninstall($this->localRepository, $package);
+
+        return $package;
     }
 
     /**
@@ -115,12 +123,7 @@ class Guild
             return;
         }
 
-        try {
-            $installed = $this->findInstalledPackage($package->getName());
-        } catch (\Exception $e) {
-            throw new RepositoryException('Error while reading local repository', $e);
-        }
-
+        $installed = $this->findInstalledPackage($package->getName());
         try {
             if ($installed) {
                 $this->installer->update($this->localRepository, $installed, $package);
@@ -157,7 +160,7 @@ class Guild
 
         if (count($installed) > 1) {
             // TODO: some restore functionality
-            throw new \RuntimeException(
+            throw new RepositoryException(
                 sprintf(
                     'Installed package repository is corrupted. Several "%s packages installed": %s',
                     $name, implode(', ', $installed)
