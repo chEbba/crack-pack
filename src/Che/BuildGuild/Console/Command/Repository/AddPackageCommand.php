@@ -7,6 +7,7 @@ namespace Che\BuildGuild\Console\Command\Repository;
 
 use Che\BuildGuild\Package\OverriddenPackageLoader;
 use Composer\Json\JsonFile;
+use Composer\Package\Dumper\ArrayDumper;
 use Composer\Package\Loader\ArrayLoader;
 use Composer\Package\Loader\JsonLoader;
 use Composer\Package\Loader\ValidatingArrayLoader;
@@ -41,7 +42,7 @@ class AddPackageCommand extends Command
     {
         $file = $input->getArgument('file');
         if (!is_readable($file)) {
-            throw new \RuntimeException(sprintf('Can not open file "%s"'));
+            throw new \RuntimeException(sprintf('Can not open file "%s"', $file));
         }
 
         $url = $input->getOption('url') ?: realpath($file);
@@ -62,8 +63,12 @@ class AddPackageCommand extends Command
         $loader = new JsonLoader(new OverriddenPackageLoader(new ValidatingArrayLoader(new ArrayLoader(), false), $overrides));
         $package = $loader->load(sprintf('phar://%s/composer.json', $file));
 
-        $repository = new FilesystemRepository(new JsonFile($input->getArgument('repository')));
-        $repository->addPackage($package);
-        $repository->write();
+        $repositoryFile = new JsonFile($input->getArgument('repository'));
+        $repo = $repositoryFile->exists() ? $repositoryFile->read() : [];
+
+        $dumper = new ArrayDumper();
+        $repo['packages'][$package->getName()][$package->getVersion()] = $dumper->dump($package);
+
+        $repositoryFile->write($repo);
     }
 }
