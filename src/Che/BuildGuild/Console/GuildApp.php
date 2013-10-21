@@ -29,6 +29,8 @@ class GuildApp extends Application
         $commands[] = new Command\TestCommand();
         $commands[] = new Command\StatusCommand();
 
+        $commands[] = new Command\Repository\AddPackageCommand();
+
         return $commands;
     }
 }
