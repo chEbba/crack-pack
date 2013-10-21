@@ -31,6 +31,7 @@ class AddPackageCommand extends Command
             ->setName('repository:add')
             ->addArgument('file', InputArgument::REQUIRED)
             ->addArgument('repository', InputArgument::OPTIONAL, '', 'packages.json')
+            ->addOption('url', null, InputOption::VALUE_OPTIONAL)
             ->addOption('package-name', null, InputOption::VALUE_OPTIONAL)
             ->addOption('package-version', null, InputOption::VALUE_OPTIONAL)
         ;
@@ -43,7 +44,15 @@ class AddPackageCommand extends Command
             throw new \RuntimeException(sprintf('Can not open file "%s"'));
         }
 
-        $overrides = [];
+        $url = $input->getOption('url') ?: realpath($file);
+
+        $overrides = [
+            'dist' => [
+                'type' => 'tar',
+                'url' => $url,
+                'shasum' => sha1_file($file)
+            ]
+        ];
         foreach (['name', 'version'] as $parameter) {
             if ($value = $input->getOption('package-'.$parameter)) {
                 $overrides[$parameter] = $value;
