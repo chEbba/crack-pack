@@ -84,7 +84,8 @@ class GuildConfig
     {
         $config = new Config();
         $config->merge(['config' => [
-            'cache-dir' => $this->cacheDir
+            'cache-dir' => $this->cacheDir,
+            'vendor-dir' => $this->installDir
         ]]);
 
         return $config;

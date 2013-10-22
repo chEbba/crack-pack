@@ -11,8 +11,6 @@ use Composer\Package\Dumper\ArrayDumper;
 use Composer\Package\Loader\ArrayLoader;
 use Composer\Package\Loader\JsonLoader;
 use Composer\Package\Loader\ValidatingArrayLoader;
-use Composer\Repository\FilesystemRepository;
-use Composer\Repository\WritableArrayRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
