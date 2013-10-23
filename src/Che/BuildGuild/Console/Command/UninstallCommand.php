@@ -36,7 +36,7 @@ class UninstallCommand extends BaseGuildCommand
     {
         $guild = $this->createGuild($input, $output);
 
-        $package = $guild->uninstall($input->getArgument('name'));
+        $package = $guild->uninstallPackage($input->getArgument('name'));
 
         $output->writeln(sprintf('Package <info>%s:%s</info> uninstalled', $package->getName(), $package->getPrettyVersion()));
     }

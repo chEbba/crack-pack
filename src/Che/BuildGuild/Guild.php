@@ -7,6 +7,7 @@ namespace Che\BuildGuild;
 
 use Che\BuildGuild\Installer\GuildInstaller;
 use Che\BuildGuild\Installer\ScriptRunner;
+use Composer\Package\BasePackage;
 use Composer\Package\Package;
 use Composer\Package\PackageInterface;
 use Composer\Package\Version\VersionParser;
@@ -23,12 +24,33 @@ class Guild
     private $remoteRepository;
     private $localRepository;
     private $installer;
+    private $stability;
 
-    public function __construct(RepositoryInterface $remoteRepository, InstalledRepositoryInterface $localRepository, GuildInstaller $installer)
+    public function __construct(RepositoryInterface $remoteRepository, InstalledRepositoryInterface $localRepository, GuildInstaller $installer, $stability = 'stable')
     {
+        if (!isset(BasePackage::$stabilities[$stability])) {
+            throw new \InvalidArgumentException(sprintf('Unknown stability "%s"', $stability));
+        }
+
         $this->remoteRepository = $remoteRepository;
         $this->localRepository  = $localRepository;
         $this->installer        = $installer;
+        $this->stability        = $stability;
+    }
+
+    /**
+     * @return array An array of stability names that guild supports
+     */
+    public function getAcceptableStability()
+    {
+        $acceptable = [];
+        foreach (BasePackage::$stabilities as $name => $value) {
+            if ($value <= BasePackage::$stabilities[$this->stability]) {
+                $acceptable[] = $name;
+            }
+        }
+
+        return $acceptable;
     }
 
     public function findPackage($name, $version)
@@ -44,12 +66,19 @@ class Guild
     public function installPackage($name, $version = null)
     {
         if ($version) {
-            $package = $this->findPackage($name, $version);
+            if (in_array($version, BasePackage::$stabilities)) {
+                $package = $this->findMostRecentPackage($name, $version);
+            } else {
+                $package = $this->findPackage($name, $version);
+                if (!$this->isStabilityAcceptable($package)) {
+                    $package = null;
+                }
+            }
         } else {
             $package = $this->findMostRecentPackage($name);
         }
         if (!$package) {
-            throw new PackageNotFoundException($name . $version ? ':' . $version : '');
+            throw new PackageNotFoundException($name . ($version ? ':' . $version : ''));
         }
 
         $this->install($package);
@@ -84,7 +113,7 @@ class Guild
         $this->installer->test($this->localRepository, $package, $reportDir);
     }
 
-    public function uninstall($name)
+    public function uninstallPackage($name)
     {
         $package = $this->findInstalledPackage($name);
         if (!$package) {
@@ -110,7 +139,6 @@ class Guild
      * @param PackageInterface $package
      *
      * @throws InstallationException
-     * @throws RepositoryException
      */
     private function install(PackageInterface $package)
     {
@@ -139,13 +167,18 @@ class Guild
         $this->localRepository->write();
     }
 
-    private function findMostRecentPackage($name)
+    private function findMostRecentPackage($name, $stability = null)
     {
         /** @var PackageInterface $recent */
         $recent = null;
         /** @var PackageInterface $package */
         foreach ($this->remoteRepository->findPackages($name) as $package) {
-            if (!$recent || ($recent->getVersion() < $package->getVersion())) {
+            if (!$this->isStabilityAcceptable($package, $stability)) {
+                continue;
+            }
+
+            // Try to find latest version
+            if (!$recent || version_compare($recent->getVersion(), $package->getVersion(), '<')) {
                 $recent = $package;
             }
         }
@@ -171,5 +204,20 @@ class Guild
         }
 
         return array_shift($installed);
+    }
+
+    /**
+     * @param PackageInterface $package
+     * @param string|null $stability
+     *
+     * @return bool
+     */
+    private function isStabilityAcceptable(PackageInterface $package, $stability = null)
+    {
+        if ($stability) {
+            return $stability === $package->getStability();
+        }
+
+        return in_array($package->getStability(), $this->getAcceptableStability());
     }
 }

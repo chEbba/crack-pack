@@ -171,7 +171,7 @@ class GuildInstaller implements InstallerInterface
         return $buildPath;
     }
 
-    public function runCommand($dir, $command, array $arguments = [], $options = [])
+    private function runCommand($dir, $command, array $arguments = [], $options = [])
     {
         $buildScript = $dir . '/' . self::BUILD_SCRIPT;
         if (!is_executable($buildScript)) {

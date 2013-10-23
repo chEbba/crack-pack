@@ -18,12 +18,14 @@ class GuildConfig
 
     private static $DEFAULT_CONFIG = [
         'install-dir' => '/var/www',
-        'cache-dir' => '/var/cache/build-guild'
+        'cache-dir' => '/var/cache/build-guild',
+        'stability' => 'stable'
     ];
 
     private $repository;
     private $installDir;
     private $cacheDir;
+    private $stability;
     private $composer;
 
     public function __construct(array $config)
@@ -39,6 +41,7 @@ class GuildConfig
         $this->repository = $config['repository'];
         $this->installDir = $config['install-dir'];
         $this->cacheDir = $config['cache-dir'];
+        $this->stability = $config['stability'];
 
         $this->composer = $this->createComposerConfig();
     }
@@ -70,6 +73,14 @@ class GuildConfig
     public function getCacheDir()
     {
         return $this->cacheDir;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStability()
+    {
+        return $this->stability;
     }
 
     /**
