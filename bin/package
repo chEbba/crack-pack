@@ -6,7 +6,7 @@ COMMIT=`git rev-parse HEAD`
 
 rm -rf /tmp/bg-box
 git clone . /tmp/bg-box
-(cd /tmp/bg-box && git checkout $COMMIT && composer install && box build)
+(cd /tmp/bg-box && git checkout $COMMIT && composer install --prefer-dist && box build)
 
 mv /tmp/bg-box/guild.phar ./
 rm -rf /tmp/bg-box
