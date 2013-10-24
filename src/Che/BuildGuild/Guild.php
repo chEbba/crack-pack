@@ -70,7 +70,7 @@ class Guild
                 $package = $this->findMostRecentPackage($name, $version);
             } else {
                 $package = $this->findPackage($name, $version);
-                if (!$this->isStabilityAcceptable($package)) {
+                if ($package && !$this->isStabilityAcceptable($package)) {
                     $package = null;
                 }
             }
