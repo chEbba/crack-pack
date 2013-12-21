@@ -43,7 +43,7 @@ class GuildFactory
             $this->env->getProcess(), $this->env->getFilesystem()
         );
 
-        return new Guild($remoteRepository, $localRepository, $installer);
+        return new Guild($remoteRepository, $localRepository, $installer, $this->config->getStability());
     }
 
     private function createDownloadManager()
