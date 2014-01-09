@@ -1,6 +1,6 @@
 <?php
 
-namespace Che\BuildGuild\Installer;
+namespace Che\CrackPack\Installer;
 
 /**
  * Class ScriptInstallException

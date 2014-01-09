@@ -3,10 +3,10 @@
  * @LICENSE_TEXT
  */
 
-namespace Che\BuildGuild;
+namespace Che\CrackPack;
 
-use Che\BuildGuild\Installer\GuildInstaller;
-use Che\BuildGuild\Installer\ScriptRunner;
+use Che\CrackPack\Installer\GuildInstaller;
+use Che\CrackPack\Installer\ScriptRunner;
 use Composer\Package\BasePackage;
 use Composer\Package\Package;
 use Composer\Package\PackageInterface;

@@ -3,9 +3,9 @@
  * @LICENSE_TEXT
  */
 
-namespace Che\BuildGuild\Console\Command\Repository;
+namespace Che\CrackPack\Console\Command\Repository;
 
-use Che\BuildGuild\Package\OverriddenPackageLoader;
+use Che\CrackPack\Package\OverriddenPackageLoader;
 use Composer\Json\JsonFile;
 use Composer\Package\Dumper\ArrayDumper;
 use Composer\Package\Loader\ArrayLoader;

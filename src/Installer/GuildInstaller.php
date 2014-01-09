@@ -1,9 +1,9 @@
 <?php
 
-namespace Che\BuildGuild\Installer;
+namespace Che\CrackPack\Installer;
 
-use Che\BuildGuild\Util\Environment;
-use Che\BuildGuild\Util\Filesystem;
+use Che\CrackPack\Util\Environment;
+use Che\CrackPack\Util\Filesystem;
 use Che\LogStock\LoggerManager;
 use Composer\Downloader\DownloadManager;
 use Composer\Installer\InstallerInterface;

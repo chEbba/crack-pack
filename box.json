@@ -1,18 +1,10 @@
 {
-    "alias": "guild.phar",
     "git-version": "package_version",
     "chmod": "0755",
     "banner": "Copyright (c)\nKirill chEbba Chebunin <iam@chebba.org>\n\nThis source file is subject to the MIT license that is bundled\nwith this package in the file LICENSE.",
-    "directories": ["src"],
-    "files": ["LICENSE"],
-    "finder": [
-        {
-            "name": "*.php",
-            "exclude": ["Tests", "tests"],
-            "in": "vendor"
-        }
-    ],
-    "main": "bin/guild",
-    "output": "guild.phar",
+    "directories": ["src", "vendor"],
+    "files": ["LICENSE", "README.md"],
+    "main": "bin/crack",
+    "output": "crack.phar",
     "stub": true
 }

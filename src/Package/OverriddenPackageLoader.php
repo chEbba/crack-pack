@@ -3,7 +3,7 @@
  * @LICENSE_TEXT
  */
 
-namespace Che\BuildGuild\Package;
+namespace Che\CrackPack\Package;
 
 use Composer\Package\Loader\LoaderInterface;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Che\BuildGuild\Util;
+namespace Che\CrackPack\Util;
 
 use Composer\Util\Filesystem as BaseFilesystem;
 use Composer\Util\ProcessExecutor;

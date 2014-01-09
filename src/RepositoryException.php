@@ -3,7 +3,7 @@
  * @LICENSE_TEXT
  */
 
-namespace Che\BuildGuild;
+namespace Che\CrackPack;
 
 /**
  * Class RepositoryException

@@ -3,7 +3,7 @@
  * @LICENSE_TEXT
  */
 
-namespace Che\BuildGuild\Util;
+namespace Che\CrackPack\Util;
 
 use Composer\IO\IOInterface;
 use Composer\Util\ProcessExecutor;

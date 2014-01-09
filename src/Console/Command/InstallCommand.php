@@ -1,8 +1,8 @@
 <?php
 
-namespace Che\BuildGuild\Console\Command;
+namespace Che\CrackPack\Console\Command;
 
-use Che\BuildGuild\Installer\GuildInstaller;
+use Che\CrackPack\Installer\GuildInstaller;
 use Composer\Package\Package;
 use Composer\Package\Version\VersionParser;
 use Symfony\Component\Console\Input\InputArgument;

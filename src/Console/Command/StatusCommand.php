@@ -3,7 +3,7 @@
  * @LICENSE_TEXT
  */
 
-namespace Che\BuildGuild\Console\Command;
+namespace Che\CrackPack\Console\Command;
 
 use Composer\Package\PackageInterface;
 use Symfony\Component\Console\Input\InputOption;

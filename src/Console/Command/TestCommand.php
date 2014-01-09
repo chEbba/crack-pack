@@ -3,7 +3,7 @@
  * @LICENSE_TEXT
  */
 
-namespace Che\BuildGuild\Console\Command;
+namespace Che\CrackPack\Console\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

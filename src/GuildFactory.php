@@ -1,10 +1,10 @@
 <?php
 
-namespace Che\BuildGuild;
+namespace Che\CrackPack;
 
-use Che\BuildGuild\Installer\GuildInstaller;
-use Che\BuildGuild\Installer\ScriptRunner;
-use Che\BuildGuild\Util\Environment;
+use Che\CrackPack\Installer\GuildInstaller;
+use Che\CrackPack\Installer\ScriptRunner;
+use Che\CrackPack\Util\Environment;
 use Composer\Config;
 use Composer\Downloader\DownloadManager;
 use Composer\Downloader;

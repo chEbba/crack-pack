@@ -1,10 +1,10 @@
 <?php
 
-namespace Che\BuildGuild\Console\Command;
+namespace Che\CrackPack\Console\Command;
 
-use Che\BuildGuild\GuildConfig;
-use Che\BuildGuild\GuildFactory;
-use Che\BuildGuild\Util\Environment;
+use Che\CrackPack\GuildConfig;
+use Che\CrackPack\GuildFactory;
+use Che\CrackPack\Util\Environment;
 use Composer\IO\ConsoleIO;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

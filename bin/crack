@@ -3,7 +3,7 @@
 
 include __DIR__.'/../vendor/autoload.php';
 
-use Che\BuildGuild\Console\GuildApp;
+use Che\CrackPack\Console\GuildApp;
 
 $version = '@package_version@';
 // Version should be replaced, if not, use unknown
