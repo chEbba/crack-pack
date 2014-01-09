@@ -103,16 +103,6 @@ class Guild
         return $package;
     }
 
-    public function testPackage($name, $reportDir = null)
-    {
-        $package = $this->findInstalledPackage($name);
-        if (!$package) {
-            throw new PackageNotFoundException($name);
-        }
-
-        $this->installer->test($this->localRepository, $package, $reportDir);
-    }
-
     public function uninstallPackage($name)
     {
         $package = $this->findInstalledPackage($name);

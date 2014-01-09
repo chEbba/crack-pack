@@ -26,7 +26,6 @@ class GuildApp extends Application
         $commands = parent::getDefaultCommands();
         $commands[] = new Command\InstallCommand();
         $commands[] = new Command\UninstallCommand();
-        $commands[] = new Command\TestCommand();
         $commands[] = new Command\StatusCommand();
 
         $commands[] = new Command\Repository\AddPackageCommand();
