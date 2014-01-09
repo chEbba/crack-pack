@@ -12,13 +12,13 @@ use Composer\Config;
  *
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-class GuildConfig
+class ManagerConfig
 {
     const REPOSITORY_FILE = 'packages.json';
 
     private static $DEFAULT_CONFIG = [
         'install-dir' => '/var/www',
-        'cache-dir' => '/var/cache/build-guild',
+        'cache-dir' => '/var/cache/crack-pack',
         'stability' => 'stable'
     ];
 

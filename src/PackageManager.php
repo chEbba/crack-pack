@@ -5,7 +5,7 @@
 
 namespace Che\CrackPack;
 
-use Che\CrackPack\Installer\GuildInstaller;
+use Che\CrackPack\Installer\PackageInstaller;
 use Che\CrackPack\Installer\ScriptRunner;
 use Composer\Package\BasePackage;
 use Composer\Package\Package;
@@ -19,14 +19,14 @@ use Composer\Repository\RepositoryInterface;
  *
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-class Guild
+class PackageManager
 {
     private $remoteRepository;
     private $localRepository;
     private $installer;
     private $stability;
 
-    public function __construct(RepositoryInterface $remoteRepository, InstalledRepositoryInterface $localRepository, GuildInstaller $installer, $stability = 'stable')
+    public function __construct(RepositoryInterface $remoteRepository, InstalledRepositoryInterface $localRepository, PackageInstaller $installer, $stability = 'stable')
     {
         if (!isset(BasePackage::$stabilities[$stability])) {
             throw new \InvalidArgumentException(sprintf('Unknown stability "%s"', $stability));
@@ -94,7 +94,7 @@ class Guild
         }
         $parser = new VersionParser();
         $package = new Package($name, $parser->normalize($version), $version);
-        $package->setType(GuildInstaller::PACKAGE_TYPE);
+        $package->setType(PackageInstaller::PACKAGE_TYPE);
         $package->setDistType($distType);
         $package->setDistUrl($file);
 

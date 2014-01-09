@@ -2,7 +2,7 @@
 
 namespace Che\CrackPack\Console\Command;
 
-use Che\CrackPack\Installer\GuildInstaller;
+use Che\CrackPack\Installer\PackageInstaller;
 use Composer\Package\Package;
 use Composer\Package\Version\VersionParser;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
  *
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-class InstallCommand extends BaseGuildCommand
+class InstallCommand extends BaseManagerCommand
 {
     /**
      * {@inheritDoc}
@@ -25,7 +25,7 @@ class InstallCommand extends BaseGuildCommand
         parent::configure();
 
         $this
-            ->setName('install')
+            ->setName('install')->setAliases(['supply'])
             ->addArgument('name', InputArgument::REQUIRED)
             ->addOption('file', 'f', InputOption::VALUE_OPTIONAL, 'File name')
         ;

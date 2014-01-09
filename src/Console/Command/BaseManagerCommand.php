@@ -2,9 +2,8 @@
 
 namespace Che\CrackPack\Console\Command;
 
-use Che\CrackPack\GuildConfig;
-use Che\CrackPack\GuildFactory;
-use Che\CrackPack\Util\Environment;
+use Che\CrackPack\ManagerConfig;
+use Che\CrackPack\ManagerFactory;
 use Composer\IO\ConsoleIO;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,9 +16,9 @@ use Symfony\Component\Yaml\Yaml;
  *
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-abstract class BaseGuildCommand extends Command
+abstract class BaseManagerCommand extends Command
 {
-    const DEFAULT_CONFIG_PATH = '/etc/build-guild/config.yml';
+    const DEFAULT_CONFIG_PATH = '/etc/crack-pack/config.yml';
 
     protected function configure()
     {
@@ -31,12 +30,9 @@ abstract class BaseGuildCommand extends Command
     protected function createGuild(InputInterface $input, OutputInterface $output)
     {
         $io = new ConsoleIO($input, $output, $this->getHelperSet());
-
         $config = $this->readConfig($input);
 
-        $factory = new GuildFactory($config, new Environment($io));
-
-        return $factory->build();
+        return (new ManagerFactory($config, $io))->build();
     }
 
     private function readConfig(InputInterface $input)
@@ -46,6 +42,6 @@ abstract class BaseGuildCommand extends Command
             throw new \RuntimeException(sprintf('Config file "%s" not exists or is not readable', $configPath));
         }
 
-        return new GuildConfig(Yaml::parse($configPath));
+        return new ManagerConfig(Yaml::parse($configPath));
     }
 }

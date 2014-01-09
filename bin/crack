@@ -3,7 +3,7 @@
 
 include __DIR__.'/../vendor/autoload.php';
 
-use Che\CrackPack\Console\GuildApp;
+use Che\CrackPack\Console\PackageManagerApp;
 
 $version = '@package_version@';
 // Version should be replaced, if not, use unknown
@@ -11,6 +11,6 @@ if ($version === '@' . 'package_version' . '@') {
     $version = 'dev';
 }
 
-$app = new GuildApp($version);
+$app = new PackageManagerApp($version);
 
 $app->run();

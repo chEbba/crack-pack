@@ -12,7 +12,7 @@ use Symfony\Component\Console\Application;
  *
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-class GuildApp extends Application
+class PackageManagerApp extends Application
 {
     const NAME = 'CrackPack';
 

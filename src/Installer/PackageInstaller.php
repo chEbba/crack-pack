@@ -2,7 +2,6 @@
 
 namespace Che\CrackPack\Installer;
 
-use Che\CrackPack\Util\Environment;
 use Che\CrackPack\Util\Filesystem;
 use Che\LogStock\LoggerManager;
 use Composer\Downloader\DownloadManager;
@@ -16,9 +15,9 @@ use Composer\Util\ProcessExecutor;
  *
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-class GuildInstaller implements InstallerInterface
+class PackageInstaller implements InstallerInterface
 {
-    const PACKAGE_TYPE = 'guild';
+    const PACKAGE_TYPE = 'pack';
     const DIR_BUILDS = 'builds';
     const DIR_CURRENT = 'current';
     const BUILD_SCRIPT = 'bin/setup';
@@ -87,14 +86,6 @@ class GuildInstaller implements InstallerInterface
         $repo->removePackage($package);
         $this->cleanBuild($package);
         $this->fs->remove($this->getPackageCurrentPath($package));
-    }
-
-    public function test(InstalledRepositoryInterface $repo, PackageInterface $package, $reportPath = null)
-    {
-        $this->checkInstalled($repo, $package);
-
-        $path = $this->getInstallPath($package);
-        $this->runCommand($path, 'test', [], $reportPath ? ['report' => $reportPath] : []);
     }
 
     /**

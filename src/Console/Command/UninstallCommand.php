@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-class UninstallCommand extends BaseGuildCommand
+class UninstallCommand extends BaseManagerCommand
 {
     /**
      * {@inheritDoc}
@@ -24,7 +24,7 @@ class UninstallCommand extends BaseGuildCommand
         parent::configure();
 
         $this
-            ->setName('uninstall')
+            ->setName('uninstall')->setAliases(['drop'])
             ->addArgument('name', InputArgument::REQUIRED)
         ;
     }

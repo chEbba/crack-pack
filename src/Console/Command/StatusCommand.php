@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
  *
  * @author Kirill chEbba Chebunin <iam@chebba.org>
  */
-class StatusCommand extends BaseGuildCommand
+class StatusCommand extends BaseManagerCommand
 {
     protected function configure()
     {
